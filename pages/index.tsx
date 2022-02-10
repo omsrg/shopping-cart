@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import Item from '../components/item/Item';
 import Header from '../components/Header';
 import Cart from '../components/cart/Cart';
@@ -32,7 +33,11 @@ const Home: NextPage = () => {
 	const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
 	const [cartItems, setCartItems] = useState([] as CartItemType[]);
 
-	const { data, isLoading, isError } = useQuery('products', getProducts);
+	const { data, isLoading, isError } = useQuery(
+		'products',
+		getProducts
+		// {initialProducts}
+	);
 
 	const totalItems = cartItems.reduce((acc: number, item) => acc + item.amount, 0);
 
@@ -53,7 +58,6 @@ const Home: NextPage = () => {
 			prevItem.reduce((acc, item) => {
 				if (item.id === id) {
 					if (item.amount === 1) return acc;
-
 					return [...acc, { ...item, amount: item.amount - 1 }];
 				} else {
 					return [...acc, item];
@@ -88,7 +92,7 @@ const Home: NextPage = () => {
 					isCartOpen={isCartOpen}
 				/>
 
-				<div className='grid gap-4  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto'>
+				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto'>
 					{data?.map((item: CartItemType) => (
 						<Item key={item.id} item={item} handleAddToCart={handleAddToCart} />
 					))}
@@ -99,3 +103,21 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+// SSR with hydrate
+export async function getStaticProps() {
+	const queryClient = new QueryClient();
+	await queryClient.prefetchQuery('products', getProducts);
+
+	return {
+		props: {
+			dehydratedState: dehydrate(queryClient),
+		},
+	};
+}
+
+// SSR with initial Data
+// export async function getStaticProps() {
+//   const initialProducts = await getProducts();
+//   return { props: { initialProducts } };
+// }
