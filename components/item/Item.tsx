@@ -1,12 +1,14 @@
 import Image from 'next/image';
-import { CartItemType } from '../../pages/index';
+import { ItemType } from '../../types/ItemType';
+import { useAddToCart } from '../../context/CartContext';
 
 type Props = {
-	item: CartItemType;
-	handleAddToCart: (item: CartItemType) => void;
+	item: ItemType;
 };
 
-const Item = ({ item, handleAddToCart }: Props) => {
+const Item = ({ item }: Props) => {
+	const addToCart = useAddToCart();
+
 	return (
 		<div className='border flex flex-col p-4 rounded-md shadow-sm shadow-darkCyan/40'>
 			<div className='mx-auto'>
@@ -23,7 +25,7 @@ const Item = ({ item, handleAddToCart }: Props) => {
 				<p className='text-sm my-3 line-clamp-2'>{item.description}</p>
 				<h3 className='text-base'>${item.price}</h3>
 			</div>
-			<button onClick={() => handleAddToCart(item)} className='button mt-auto'>
+			<button onClick={() => addToCart(item)} className='button mt-auto'>
 				Add to cart
 			</button>
 		</div>

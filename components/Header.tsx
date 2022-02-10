@@ -1,11 +1,12 @@
 import { GrCart } from 'react-icons/gr';
+import { useTotalItems } from '../context/CartContext';
 
 interface Props {
-	totalItems: number;
 	openCartHandler: () => void;
 }
 
-const Header = ({ openCartHandler, totalItems }: Props) => {
+const Header = ({ openCartHandler }: Props) => {
+	const totalItems = useTotalItems();
 	const cartOpen = () => {
 		openCartHandler();
 	};

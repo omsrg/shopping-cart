@@ -1,25 +1,25 @@
 import CartItem from '../cart-item/CartItem';
-import { CartItemType } from '../../pages/index';
+import { ItemType } from '../../types/ItemType';
 import { GrClose } from 'react-icons/gr';
+import {
+	useCartItems,
+	useTotalItems,
+	useAddToCart,
+	useRemoveFromCart,
+} from '../../context/CartContext';
 
 type Props = {
-	cartItems: CartItemType[];
-	totalItems: number;
 	isCartOpen: boolean;
-	addToCart: (item: CartItemType) => void;
-	removeFromCart: (id: number) => void;
 	openCartHandler: () => void;
 };
 
-const Cart = ({
-	cartItems,
-	totalItems,
-	addToCart,
-	isCartOpen,
-	removeFromCart,
-	openCartHandler,
-}: Props) => {
-	const calculateTotal = (items: CartItemType[]) =>
+const Cart = ({ isCartOpen, openCartHandler }: Props) => {
+	const cartItems = useCartItems();
+	const totalItems = useTotalItems();
+	const addToCart = useAddToCart();
+	const removeFromCart = useRemoveFromCart();
+
+	const calculateTotal = (items: ItemType[]) =>
 		items.reduce((acc, item) => acc + item.amount * item.price, 0);
 
 	const closeCart = () => {
