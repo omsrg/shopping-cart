@@ -12,11 +12,11 @@ const Header = ({ openCartHandler }: Props) => {
 	};
 
 	return (
-		<header className='w-full py-8'>
-			<div className='layout flex justify-end'>
+		<header className='fixed w-full py-8 z-50'>
+			<div className='layout px-4 flex justify-end'>
 				<div className='relative cursor-pointer' onClick={cartOpen}>
 					{totalItems !== 0 && (
-						<span className='absolute font-semibold flex items-center justify-center -top-3 -right-3 w-6 h-6 text-white bg-red-500 rounded-full'>
+						<span className='absolute font-semibold flex items-center justify-center -top-3 -right-3 w-5 h-5 text-white bg-red-500 rounded-full'>
 							{totalItems}
 						</span>
 					)}

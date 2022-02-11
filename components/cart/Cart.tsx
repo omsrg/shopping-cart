@@ -10,10 +10,10 @@ import {
 
 type Props = {
 	isCartOpen: boolean;
-	openCartHandler: () => void;
+	closeCartHandler: () => void;
 };
 
-const Cart = ({ isCartOpen, openCartHandler }: Props) => {
+const Cart = ({ isCartOpen, closeCartHandler }: Props) => {
 	const cartItems = useCartItems();
 	const totalItems = useTotalItems();
 	const addToCart = useAddToCart();
@@ -23,17 +23,17 @@ const Cart = ({ isCartOpen, openCartHandler }: Props) => {
 		items.reduce((acc, item) => acc + item.amount * item.price, 0);
 
 	const closeCart = () => {
-		openCartHandler();
+		closeCartHandler();
 	};
 
 	return (
 		<>
 			<aside
-				className={`z-50 fixed h-screen w-5/12 bg-white top-0 right-0 flex flex-col overflow-y-auto transition-all ease-in-out duration-300 ${
-					isCartOpen ? 'translate-x-0 ' : 'translate-x-full'
+				className={`z-50 fixed h-screen w-9/12 md:w-7/12 lg:w-5/12 pb-8 bg-white top-0 right-0 flex flex-col overflow-y-auto transition-all ease-in-out duration-300 ${
+					isCartOpen ? 'translate-x-0' : 'translate-x-full'
 				}`}
 			>
-				<button className='self-end mt-4 mr-12' onClick={closeCart}>
+				<button className='self-end mt-8 mr-8' onClick={closeCart}>
 					<GrClose className='w-8 h-8' />
 				</button>
 
@@ -57,7 +57,7 @@ const Cart = ({ isCartOpen, openCartHandler }: Props) => {
 			</aside>
 			{isCartOpen && (
 				<div
-					className='z-10 hidde fixed top-0 left-0 bottom-0 w-screen h-screen bg-darkGray/75 transition duration-200'
+					className='z-10 fixed top-0 left-0 bottom-0 w-screen h-screen bg-darkGray/75'
 					onClick={closeCart}
 				/>
 			)}

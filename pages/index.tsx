@@ -27,7 +27,11 @@ const Home: NextPage = () => {
 	);
 
 	const openCartHandler = () => {
-		setIsCartOpen(!isCartOpen);
+		setIsCartOpen(true);
+	};
+
+	const closeCartHandler = () => {
+		setIsCartOpen(false);
 	};
 
 	if (isLoading) return <p>Loading...</p>;
@@ -42,10 +46,10 @@ const Home: NextPage = () => {
 			</Head>
 
 			<Header openCartHandler={openCartHandler} />
-			<main className='layout'>
-				<Cart openCartHandler={openCartHandler} isCartOpen={isCartOpen} />
+			<main className='layout py-24'>
+				<Cart closeCartHandler={closeCartHandler} isCartOpen={isCartOpen} />
 
-				<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto'>
+				<div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto'>
 					{data?.map((item: ItemType) => (
 						<Item key={item.id} item={item} />
 					))}
