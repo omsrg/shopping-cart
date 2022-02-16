@@ -1,4 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shopping Cart
+
+![Shopping Cart Screenshot](https://user-images.githubusercontent.com/72729349/154227177-26b666ff-aa85-469f-b2d8-f8e7844f1b88.png)
+
+Shopping Cart build with React, Nextjs and [fakestore API](https://fakestoreapi.com/)
+
+[Demo Website](https://shopping-cart-ten-omega.vercel.app/)
+
+## Built With
+
+-   NextJS
+-   Typescript
+-   TailwindCSS
+-   react-query
+
+## Getting Started
+
+**1. To get started, first install all the necessary dependencies.**
+
+```
+$ yarn install
+```
+
+**2. Start the development server**
+
+```
+$ yarn dev
+```
+
+Open http://localhost:3000/ with your browser to see the result.
 
 ## Getting Started
 
@@ -22,8 +51,8 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
